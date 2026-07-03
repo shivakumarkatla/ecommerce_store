@@ -1,0 +1,248 @@
+/* ==========================================================================
+   PAGES/PRODUCT.CSS
+   Layout for the Product Detail Page: gallery + info two-column grid
+   (stacked on mobile), purchase controls, tabs spacing, and the loading
+   skeleton shape. Variant button visuals live here too since they're
+   specific to the PDP (not reused elsewhere yet).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   LOADING SKELETON — mirrors the eventual two-column shape so there's
+   no layout shift when real content replaces it.
+   -------------------------------------------------------------------------- */
+.pdp-loading {
+  display: grid;
+  gap: var(--space-8);
+  padding-block: var(--space-6) var(--space-12);
+}
+
+.pdp-loading__gallery {
+  aspect-ratio: 1 / 1;
+}
+
+.pdp-loading__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.pdp-loading__line {
+  height: 1.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.pdp-loading__line--title {
+  height: 2.5rem;
+  width: 80%;
+}
+
+.pdp-loading__line--price {
+  width: 40%;
+}
+
+.pdp-loading__line--text {
+  height: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   PDP LAYOUT — stacked on mobile, two columns from tablet up
+   -------------------------------------------------------------------------- */
+.pdp-layout {
+  display: grid;
+  gap: var(--space-8);
+  padding-block: var(--space-6) var(--space-10);
+}
+
+/* --------------------------------------------------------------------------
+   GALLERY
+   -------------------------------------------------------------------------- */
+.pdp-gallery {
+  min-width: 0;
+}
+
+.pdp-gallery__main {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--color-neutral-100);
+}
+
+.pdp-gallery__main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pdp-gallery__thumbs {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.pdp-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 2px solid transparent;
+  flex-shrink: 0;
+  background-color: var(--color-neutral-100);
+}
+
+.pdp-thumb[aria-pressed="true"] {
+  border-color: var(--color-brand-600);
+}
+
+.pdp-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------------------------
+   INFO COLUMN
+   -------------------------------------------------------------------------- */
+.pdp-info h1 {
+  margin-bottom: var(--space-2);
+}
+
+.pdp-info #pdp-rating {
+  margin-bottom: var(--space-4);
+}
+
+.pdp-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-3);
+}
+
+.pdp-price-row .product-card__price--original {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-regular);
+}
+
+.pdp-stock-status {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-4);
+}
+
+.pdp-stock-status.in-stock {
+  color: var(--color-success-500);
+}
+
+.pdp-stock-status.out-of-stock {
+  color: var(--color-danger-500);
+}
+
+.pdp-short-description {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-6);
+  max-width: 60ch;
+}
+
+/* --------------------------------------------------------------------------
+   VARIANT SELECTORS — built dynamically by product.js
+   -------------------------------------------------------------------------- */
+.pdp-variant-group {
+  margin-bottom: var(--space-5);
+}
+
+.pdp-variant-group__label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-2);
+}
+
+.pdp-variant-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pdp-variant-btn {
+  padding: var(--space-2) var(--space-4);
+  min-height: 40px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  background-color: var(--color-white);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.pdp-variant-btn:hover {
+  border-color: var(--color-brand-500);
+}
+
+.pdp-variant-btn[aria-pressed="true"] {
+  border-color: var(--color-brand-600);
+  background-color: var(--color-brand-50);
+  color: var(--color-brand-700);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* --------------------------------------------------------------------------
+   PURCHASE ROW — stepper + add-to-cart + wishlist
+   -------------------------------------------------------------------------- */
+.pdp-purchase-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.pdp-add-to-cart {
+  flex: 1;
+  min-width: 180px;
+}
+
+.pdp-wishlist-btn {
+  border: 1px solid var(--color-border-strong);
+}
+
+.pdp-wishlist-btn.is-active {
+  color: var(--color-danger-500);
+  border-color: var(--color-danger-500);
+}
+
+.pdp-shipping-note {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   TABS — page-level spacing around the shared .tabs component
+   -------------------------------------------------------------------------- */
+.pdp-tabs {
+  margin-bottom: var(--space-12);
+  max-width: 70ch;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (min-width: 768px) {
+  .pdp-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-10);
+  }
+
+  .pdp-loading {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pdp-layout {
+    grid-template-columns: 3fr 2fr;
+  }
+
+  .pdp-loading {
+    grid-template-columns: 3fr 2fr;
+  }
+}

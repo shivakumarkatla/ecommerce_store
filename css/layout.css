@@ -1,0 +1,412 @@
+/* ==========================================================================
+   LAYOUT.CSS
+   Structural layout only: containers, grid systems, header/footer/nav
+   positioning, section spacing. No color/typography decisions here beyond
+   what's needed for structure — visual styling of components lives in
+   components.css. Mobile-first: base rules target small screens, then
+   min-width queries enhance upward.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CONTAINER — the shared max-width wrapper used on every page
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+}
+
+/* --------------------------------------------------------------------------
+   SITE HEADER
+   Mobile: [menu-toggle] [logo] .......... [search-icon] [cart] [account]
+   Desktop: [logo] [nav] [search bar] [wishlist] [cart] [account]
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky-header);
+  background-color: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: var(--header-height);
+}
+
+.site-header__logo {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+}
+
+/* Desktop primary nav — hidden on mobile, shown from --bp-lg up */
+.site-nav {
+  display: none;
+}
+
+.site-nav__list {
+  display: flex;
+  gap: var(--space-6);
+}
+
+/* Search bar grows to fill available space between nav and icons */
+.site-search {
+  display: none; /* shown from --bp-md up; mobile uses search icon in nav instead */
+  position: relative;
+  flex: 1 1 auto;
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+.site-search__input {
+  width: 100%;
+}
+
+.site-search__submit {
+  position: absolute;
+  right: var(--space-1);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-left: auto;
+}
+
+.site-header__menu-toggle {
+  margin-right: var(--space-1);
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE OFF-CANVAS NAV + OVERLAY
+   -------------------------------------------------------------------------- */
+.mobile-nav {
+  position: fixed;
+  inset: 0 25% 0 auto; /* right-hand drawer, 75% width max */
+  width: 75%;
+  max-width: 320px;
+  background-color: var(--color-bg-surface);
+  z-index: var(--z-drawer);
+  padding: var(--space-6) var(--space-4);
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform var(--transition-base);
+  box-shadow: var(--shadow-lg);
+}
+
+.mobile-nav.is-open {
+  transform: translateX(0);
+}
+
+.mobile-nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.mobile-nav__list a {
+  display: block;
+  padding: var(--space-3) var(--space-2);
+  font-size: var(--text-lg);
+  border-radius: var(--radius-md);
+}
+
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(17, 24, 39, 0.5);
+  z-index: calc(var(--z-drawer) - 1);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.drawer-overlay.is-visible {
+  opacity: 1;
+}
+
+/* Lock body scroll while the drawer is open (class toggled via JS) */
+body.nav-open {
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   BREADCRUMB — shared structural spacing (used on shop, product, cart,
+   checkout, search — any page with a breadcrumb trail). Visual styling
+   (.breadcrumb__list etc.) lives in components.css alongside the other
+   reusable components; this is just the page-level spacing wrapper.
+   -------------------------------------------------------------------------- */
+.breadcrumb {
+  padding-top: var(--space-4);
+}
+
+/* --------------------------------------------------------------------------
+   SECTION SPACING — shared rhythm for all homepage/page sections
+   -------------------------------------------------------------------------- */
+.section {
+  padding-block: var(--space-10);
+}
+
+.section__heading {
+  margin-bottom: var(--space-6);
+}
+
+.section__header-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.section__header-row .section__heading {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   HERO
+   -------------------------------------------------------------------------- */
+.hero {
+  padding-block: var(--space-12) var(--space-10);
+  background-color: var(--color-brand-50);
+}
+
+.hero__content {
+  max-width: 640px;
+}
+
+.hero__heading {
+  margin-block: var(--space-3) var(--space-4);
+}
+
+.hero__subtext {
+  margin-bottom: var(--space-6);
+  max-width: 52ch;
+}
+
+/* --------------------------------------------------------------------------
+   CATEGORY GRID
+   Mobile: 2 columns → Tablet: 3 → Desktop: 6 (single row of shortcuts)
+   -------------------------------------------------------------------------- */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+/* --------------------------------------------------------------------------
+   PRODUCT GRID
+   Mobile: 1 col → sm: 2 → md: 3 → lg: 4
+   Using auto-fill/minmax as a safety net alongside explicit breakpoints
+   so the grid never produces oddly-stretched single cards.
+   -------------------------------------------------------------------------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.skeleton-card {
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    90deg,
+    var(--color-neutral-100) 25%,
+    var(--color-neutral-200) 37%,
+    var(--color-neutral-100) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-card {
+    animation: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   PROMO BANNER
+   -------------------------------------------------------------------------- */
+.promo-banner {
+  background-color: var(--color-neutral-900);
+  padding-block: var(--space-10);
+}
+
+.promo-banner__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  align-items: flex-start;
+}
+
+.promo-banner__heading {
+  margin-bottom: var(--space-2);
+}
+
+/* --------------------------------------------------------------------------
+   NEWSLETTER
+   -------------------------------------------------------------------------- */
+.newsletter {
+  padding-block: var(--space-12);
+}
+
+.newsletter__inner {
+  max-width: 560px;
+  text-align: center;
+  margin-inline: auto;
+}
+
+.newsletter__text {
+  margin-block: var(--space-2) var(--space-6);
+}
+
+.newsletter__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.newsletter__input {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   SITE FOOTER
+   -------------------------------------------------------------------------- */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--space-12);
+  padding-block: var(--space-10) var(--space-6);
+  background-color: var(--color-bg-surface-alt);
+}
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.site-footer__col ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.site-footer__socials {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.site-footer__bottom {
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   TOAST CONTAINER — fixed position, stacks notifications
+   -------------------------------------------------------------------------- */
+.toast-container {
+  position: fixed;
+  bottom: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: calc(100% - var(--space-8));
+  max-width: 360px;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+/* --- Small (≥600px): 2-col category grid stays, product grid → 2 col stays,
+       newsletter form goes inline --- */
+@media (min-width: 600px) {
+  .newsletter__form {
+    flex-direction: row;
+  }
+
+  .newsletter__input {
+    flex: 1;
+  }
+}
+
+/* --- Medium / Tablet (≥768px) --- */
+@media (min-width: 768px) {
+  .site-search {
+    display: flex;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .promo-banner__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .site-footer__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- Large / Desktop (≥1024px) --- */
+@media (min-width: 1024px) {
+  .site-header__menu-toggle {
+    display: none; /* hamburger no longer needed once full nav is visible */
+  }
+
+  .site-nav {
+    display: block;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .site-footer__grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+  }
+
+  .hero__inner {
+    padding-block: var(--space-8);
+  }
+}
+
+/* --- Extra large (≥1280px): container already caps via max-width,
+       just increase section breathing room --- */
+@media (min-width: 1280px) {
+  .section {
+    padding-block: var(--space-12);
+  }
+}

@@ -1,0 +1,722 @@
+/* ==========================================================================
+   COMPONENTS.CSS
+   Reusable, self-contained UI components. Every component here is designed
+   to be dropped into ANY page without modification — home, shop, product,
+   cart, checkout, etc. Naming follows BEM (.block__element--modifier).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   TEXT TREATMENTS (small reusable typographic patterns)
+   -------------------------------------------------------------------------- */
+.eyebrow {
+  display: inline-block;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brand-600);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-2);
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-brand-600);
+  white-space: nowrap;
+}
+
+.link-arrow::after {
+  content: "→";
+  transition: transform var(--transition-fast);
+}
+
+.link-arrow:hover::after {
+  transform: translateX(3px);
+}
+
+/* --------------------------------------------------------------------------
+   BUTTONS
+   Base .btn + modifiers for intent (primary/secondary/ghost/danger) and
+   size (sm/lg). Minimum 44px touch target on all interactive sizes.
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-base);
+  border: 1px solid transparent;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background-color: var(--color-brand-600);
+  color: var(--color-text-inverse);
+}
+
+.btn--primary:hover:not(:disabled) {
+  background-color: var(--color-brand-700);
+}
+
+.btn--secondary {
+  background-color: var(--color-white);
+  color: var(--color-neutral-900);
+  border-color: var(--color-border-strong);
+}
+
+.btn--secondary:hover:not(:disabled) {
+  background-color: var(--color-neutral-100);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  color: var(--color-brand-600);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  background-color: var(--color-brand-50);
+}
+
+.btn--danger {
+  background-color: var(--color-danger-500);
+  color: var(--color-text-inverse);
+}
+
+.btn--danger:hover:not(:disabled) {
+  background-color: #B91C1C;
+}
+
+.btn--lg {
+  min-height: 52px;
+  padding-inline: var(--space-6);
+  font-size: var(--text-lg);
+}
+
+.btn--sm {
+  min-height: 36px;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.btn--full {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   ICON BUTTON — square, transparent, used for header icons / close buttons
+   -------------------------------------------------------------------------- */
+.icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  color: var(--color-neutral-900);
+  transition: background-color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.icon-btn:hover {
+  background-color: var(--color-neutral-100);
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* Cart badge — small count bubble anchored to the cart icon button */
+.site-header__cart {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 18px;
+  height: 18px;
+  padding-inline: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-accent-500);
+  color: var(--color-white);
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-full);
+  line-height: 1;
+}
+
+/* Hide the badge entirely when cart is empty (JS toggles this class) */
+.cart-badge.is-empty {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   FORM ELEMENTS — inputs, labels, errors
+   -------------------------------------------------------------------------- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.form-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.form-label .required-mark {
+  color: var(--color-danger-500);
+  margin-left: var(--space-1);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  border-color: var(--color-brand-500);
+  box-shadow: 0 0 0 3px var(--color-brand-100);
+}
+
+/* Invalid state — paired with an actual error message, never color alone */
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--color-danger-500);
+}
+
+.form-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--color-danger-500);
+  font-weight: var(--font-weight-medium);
+}
+
+.form-error[hidden] {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   PRODUCT CARD — used on home, shop, search, related-products
+   -------------------------------------------------------------------------- */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+  height: 100%;
+}
+
+.product-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.product-card__media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background-color: var(--color-neutral-100);
+}
+
+.product-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-card__wishlist-btn {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.product-card__wishlist-btn.is-active {
+  color: var(--color-danger-500);
+}
+
+.product-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  flex: 1;
+}
+
+.product-card__category {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.product-card__title {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  /* Clamp to 2 lines so mismatched title lengths don't break grid rhythm */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-card__price-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+.product-card__price {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.product-card__price--original {
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+.product-card__add-btn {
+  margin-top: var(--space-2);
+}
+
+/* --------------------------------------------------------------------------
+   BADGES — sale, new, out-of-stock. Icon/text-based, never color-only.
+   -------------------------------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+}
+
+.badge--sale {
+  background-color: var(--color-danger-50);
+  color: var(--color-danger-500);
+}
+
+.badge--new {
+  background-color: var(--color-brand-50);
+  color: var(--color-brand-600);
+}
+
+.badge--out-of-stock {
+  background-color: var(--color-neutral-200);
+  color: var(--color-neutral-600);
+}
+
+/* --------------------------------------------------------------------------
+   RATING STARS
+   -------------------------------------------------------------------------- */
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.rating__stars {
+  color: var(--color-accent-500);
+  letter-spacing: 1px;
+}
+
+/* --------------------------------------------------------------------------
+   QUANTITY STEPPER — used on PDP and cart
+   -------------------------------------------------------------------------- */
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.stepper__btn {
+  width: 40px;
+  height: 40px;
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.stepper__btn:hover:not(:disabled) {
+  background-color: var(--color-neutral-100);
+}
+
+.stepper__input {
+  width: 44px;
+  min-height: 40px;
+  text-align: center;
+  border: none;
+  border-inline: 1px solid var(--color-border-strong);
+  border-radius: 0;
+  -moz-appearance: textfield;
+}
+
+.stepper__input::-webkit-outer-spin-button,
+.stepper__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   TOAST NOTIFICATION
+   -------------------------------------------------------------------------- */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-neutral-900);
+  color: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  font-size: var(--text-sm);
+  animation: toast-in var(--transition-base);
+}
+
+.toast--success {
+  background-color: var(--color-success-500);
+}
+
+.toast--error {
+  background-color: var(--color-danger-500);
+}
+
+.toast.is-leaving {
+  animation: toast-out var(--transition-base) forwards;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes toast-out {
+  from { opacity: 1; }
+  to { opacity: 0; transform: translateY(8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast { animation: none; }
+}
+
+/* --------------------------------------------------------------------------
+   MODAL
+   -------------------------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(17, 24, 39, 0.5);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal {
+  background-color: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+/* --------------------------------------------------------------------------
+   TABS — used on PDP (Description / Reviews / Shipping)
+   -------------------------------------------------------------------------- */
+.tabs__list {
+  display: flex;
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  overflow-x: auto;
+}
+
+.tabs__trigger {
+  padding: var(--space-3) var(--space-4);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.tabs__trigger[aria-selected="true"] {
+  color: var(--color-brand-600);
+  border-bottom-color: var(--color-brand-600);
+}
+
+.tabs__panel {
+  padding-block: var(--space-4);
+}
+
+.tabs__panel[hidden] {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   BREADCRUMB
+   -------------------------------------------------------------------------- */
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.breadcrumb__list li:not(:last-child)::after {
+  content: "/";
+  margin-left: var(--space-2);
+  color: var(--color-text-muted);
+}
+
+.breadcrumb__list a:hover {
+  color: var(--color-brand-600);
+}
+
+.breadcrumb__list li:last-child {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* --------------------------------------------------------------------------
+   EMPTY STATE — cart, wishlist, search with no results
+   -------------------------------------------------------------------------- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-block: var(--space-16);
+  gap: var(--space-3);
+  color: var(--color-text-secondary);
+}
+
+.empty-state__icon {
+  width: 64px;
+  height: 64px;
+  color: var(--color-neutral-300);
+}
+
+/* --------------------------------------------------------------------------
+   FOOTER TEXT TREATMENTS
+   -------------------------------------------------------------------------- */
+.site-footer__logo {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-2);
+}
+
+.site-footer__text {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  max-width: 32ch;
+}
+
+.site-footer__heading {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-1);
+}
+
+.site-footer__col a {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.site-footer__col a:hover {
+  color: var(--color-brand-600);
+}
+
+.site-footer__bottom {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   PROMO BANNER TEXT TREATMENTS (structure lives in layout.css)
+   -------------------------------------------------------------------------- */
+.promo-banner__heading {
+  color: var(--color-white);
+}
+
+.promo-banner__text {
+  color: var(--color-neutral-300);
+}
+
+.newsletter__heading {
+  color: var(--color-text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   CATEGORY CARD (used inside .category-grid)
+   -------------------------------------------------------------------------- */
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-2);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.category-card:hover {
+  border-color: var(--color-brand-500);
+  box-shadow: var(--shadow-sm);
+}
+
+.category-card__icon {
+  width: 32px;
+  height: 32px;
+  color: var(--color-brand-600);
+}
+
+
+/* --------------------------------------------------------------------------
+   ORDER SUMMARY — shared between cart.html and checkout.html
+   -------------------------------------------------------------------------- */
+   ORDER SUMMARY
+   -------------------------------------------------------------------------- */
+.order-summary {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  height: fit-content;
+}
+
+.order-summary__heading {
+  margin-bottom: var(--space-4);
+}
+
+.promo-form {
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.promo-form__row {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.promo-form__row input {
+  flex: 1;
+}
+
+.order-summary__rows {
+  margin-bottom: var(--space-5);
+}
+
+.order-summary__row {
+  display: flex;
+  justify-content: space-between;
+  padding-block: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.order-summary__row dt,
+.order-summary__row dd {
+  margin: 0;
+}
+
+.order-summary__row--total {
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--space-2);
+  padding-top: var(--space-3);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.order-summary__note {
+  margin-top: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-align: center;
+}

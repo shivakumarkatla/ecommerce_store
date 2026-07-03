@@ -1,0 +1,101 @@
+/* ==========================================================================
+   PAGES/CART.CSS
+   Layout for the cart page: two-column (items + summary) that stacks on
+   mobile, individual line-item rows (rendered by cart.js), and the
+   promo code / order summary sidebar.
+   ========================================================================== */
+
+.cart-heading {
+  padding-block: var(--space-4) var(--space-6);
+}
+
+.cart-layout {
+  display: grid;
+  gap: var(--space-8);
+  padding-bottom: var(--space-16);
+}
+
+/* --------------------------------------------------------------------------
+   CART ITEMS
+   -------------------------------------------------------------------------- */
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Individual line item row — class applied by cart.js to each rendered row */
+.cart-item {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.cart-item__image {
+  width: 88px;
+  height: 88px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  background-color: var(--color-neutral-100);
+}
+
+.cart-item__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.cart-item__name {
+  font-weight: var(--font-weight-medium);
+}
+
+.cart-item__variant {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.cart-item__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+.cart-item__price {
+  font-weight: var(--font-weight-semibold);
+}
+
+.cart-item__remove {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-decoration: underline;
+}
+
+.cart-item__remove:hover {
+  color: var(--color-danger-500);
+}
+
+/* --------------------------------------------------------------------------
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .cart-layout {
+    grid-template-columns: 1fr 360px;
+    align-items: start;
+  }
+
+  .order-summary {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-4));
+  }
+}

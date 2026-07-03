@@ -1,0 +1,203 @@
+/* ==========================================================================
+   PAGES/ACCOUNT.CSS
+   Shared styles for login.html, register.html, account.html, and
+   404.html. Covers the centered auth panel, account dashboard layout,
+   and the 404 not-found panel.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   AUTH PANEL — login + register
+   -------------------------------------------------------------------------- */
+.auth-panel {
+  max-width: 440px;
+  margin-inline: auto;
+  padding-block: var(--space-10) var(--space-16);
+}
+
+.auth-panel__heading {
+  margin-bottom: var(--space-2);
+}
+
+.auth-panel__sub {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-6);
+}
+
+.auth-panel__error {
+  margin-bottom: var(--space-4);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-bottom: var(--space-6);
+}
+
+.auth-panel__switch {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-4);
+}
+
+.auth-panel__switch a {
+  color: var(--color-brand-600);
+  text-decoration: underline;
+}
+
+.form-hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+/* --------------------------------------------------------------------------
+   ACCOUNT DASHBOARD LAYOUT
+   -------------------------------------------------------------------------- */
+.account-layout {
+  display: grid;
+  gap: var(--space-8);
+  padding-block: var(--space-6) var(--space-16);
+}
+
+/* --------------------------------------------------------------------------
+   ACCOUNT SIDEBAR
+   -------------------------------------------------------------------------- */
+.account-sidebar {
+  min-width: 0;
+}
+
+.account-sidebar__list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.account-sidebar__link {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  width: auto;
+  text-align: left;
+}
+
+.account-sidebar__link:hover {
+  background-color: var(--color-neutral-100);
+  color: var(--color-text-primary);
+}
+
+.account-sidebar__link--active {
+  background-color: var(--color-brand-50);
+  color: var(--color-brand-700);
+  font-weight: var(--font-weight-medium);
+}
+
+.account-sidebar__signout {
+  color: var(--color-danger-500);
+  margin-top: auto;
+}
+
+.account-sidebar__signout:hover {
+  background-color: var(--color-danger-50);
+}
+
+/* --------------------------------------------------------------------------
+   ACCOUNT CONTENT
+   -------------------------------------------------------------------------- */
+.account-content {
+  min-width: 0;
+}
+
+.account-section__heading {
+  margin-bottom: var(--space-4);
+}
+
+.account-card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: var(--space-2) var(--space-4);
+  align-items: baseline;
+  margin-bottom: var(--space-6);
+}
+
+.account-card__label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.account-card__value {
+  font-size: var(--text-sm);
+}
+
+.account-orders-empty {
+  padding-block: var(--space-10);
+}
+
+/* --------------------------------------------------------------------------
+   404 NOT FOUND PANEL
+   -------------------------------------------------------------------------- */
+.not-found-panel {
+  text-align: center;
+  padding-block: var(--space-16);
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.not-found-panel__code {
+  font-size: clamp(4rem, 15vw, 8rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-200);
+  line-height: 1;
+  margin-bottom: var(--space-2);
+}
+
+.not-found-panel__heading {
+  margin-bottom: var(--space-3);
+}
+
+.not-found-panel__text {
+  color: var(--color-text-secondary);
+  max-width: 44ch;
+  margin-inline: auto;
+  margin-bottom: var(--space-8);
+}
+
+.not-found-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (min-width: 768px) {
+  .account-layout {
+    grid-template-columns: 200px 1fr;
+    align-items: start;
+  }
+
+  .account-sidebar__list {
+    flex-direction: column;
+    border-bottom: none;
+    border-right: 1px solid var(--color-border);
+    padding-bottom: 0;
+    padding-right: var(--space-4);
+  }
+
+  .account-sidebar__link {
+    width: 100%;
+  }
+}

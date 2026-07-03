@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in — Nestwell</title>
+  <meta name="description" content="Sign in to your Nestwell account." />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/account.css" />
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header site-header--checkout" id="site-header">
+    <div class="container site-header__inner">
+      <a href="index.html" class="site-header__logo" aria-label="Nestwell — home">Nestwell</a>
+      <a href="shop.html" class="btn btn--ghost btn--sm">Continue shopping</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="container">
+      <div class="auth-panel">
+        <h1 class="auth-panel__heading">Welcome back</h1>
+        <p class="auth-panel__sub">Sign in to access your orders, wishlist and account details.</p>
+
+        <p class="form-error auth-panel__error" id="login-error" role="alert" hidden></p>
+
+        <form class="auth-form" id="login-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="login-email">Email address <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="email" id="login-email" name="email" autocomplete="email" required aria-describedby="login-email-error" />
+            <p class="form-error" id="login-email-error" role="alert" hidden></p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-password">Password <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="password" id="login-password" name="password" autocomplete="current-password" required aria-describedby="login-password-error" />
+            <p class="form-error" id="login-password-error" role="alert" hidden></p>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--full btn--lg" id="login-submit-btn">Sign in</button>
+        </form>
+
+        <p class="auth-panel__switch">
+          Don't have an account? <a href="register.html">Create one</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast-container" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+  <script src="js/modules/storage.js"></script>
+  <script src="js/modules/toast.js"></script>
+  <script src="js/modules/cart.js"></script>
+  <script src="js/modules/wishlist.js"></script>
+  <script src="js/modules/product-render.js"></script>
+  <script src="js/modules/nav.js"></script>
+  <script src="js/modules/validation.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/account.js"></script>
+</body>
+</html>

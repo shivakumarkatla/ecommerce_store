@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Nestwell</title>
+  <meta name="description" content="Complete your purchase at Nestwell." />
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/checkout.css" />
+
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Simplified header for checkout — no nav distractions -->
+  <header class="site-header site-header--checkout" id="site-header">
+    <div class="container site-header__inner">
+      <a href="index.html" class="site-header__logo" aria-label="Nestwell — home">Nestwell</a>
+      <a href="cart.html" class="btn btn--ghost btn--sm">← Back to cart</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="container">
+
+      <!-- Step indicator -->
+      <nav aria-label="Checkout steps" class="checkout-steps">
+        <ol class="checkout-steps__list">
+          <li class="checkout-step checkout-step--active" id="step-indicator-1" aria-current="step">
+            <span class="checkout-step__number" aria-hidden="true">1</span>
+            <span class="checkout-step__label">Shipping</span>
+          </li>
+          <li class="checkout-step" id="step-indicator-2">
+            <span class="checkout-step__number" aria-hidden="true">2</span>
+            <span class="checkout-step__label">Payment</span>
+          </li>
+          <li class="checkout-step" id="step-indicator-3">
+            <span class="checkout-step__number" aria-hidden="true">3</span>
+            <span class="checkout-step__label">Confirmation</span>
+          </li>
+        </ol>
+      </nav>
+
+      <div class="checkout-layout">
+
+        <!-- Form panels -->
+        <div class="checkout-form-area">
+
+          <!-- STEP 1: Shipping -->
+          <section id="step-1" class="checkout-panel" aria-labelledby="shipping-heading">
+            <h1 id="shipping-heading" class="checkout-panel__heading">Shipping information</h1>
+
+            <form id="shipping-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="first-name">First name <span class="required-mark" aria-hidden="true">*</span></label>
+                  <input type="text" id="first-name" name="first_name" autocomplete="given-name" required aria-describedby="first-name-error" />
+                  <p class="form-error" id="first-name-error" role="alert" hidden></p>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="last-name">Last name <span class="required-mark" aria-hidden="true">*</span></label>
+                  <input type="text" id="last-name" name="last_name" autocomplete="family-name" required aria-describedby="last-name-error" />
+                  <p class="form-error" id="last-name-error" role="alert" hidden></p>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="email">Email address <span class="required-mark" aria-hidden="true">*</span></label>
+                <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="email-error" />
+                <p class="form-error" id="email-error" role="alert" hidden></p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="address">Street address <span class="required-mark" aria-hidden="true">*</span></label>
+                <input type="text" id="address" name="address" autocomplete="street-address" required aria-describedby="address-error" />
+                <p class="form-error" id="address-error" role="alert" hidden></p>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="city">City <span class="required-mark" aria-hidden="true">*</span></label>
+                  <input type="text" id="city" name="city" autocomplete="address-level2" required aria-describedby="city-error" />
+                  <p class="form-error" id="city-error" role="alert" hidden></p>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="zip">ZIP / postal code <span class="required-mark" aria-hidden="true">*</span></label>
+                  <input type="text" id="zip" name="zip" autocomplete="postal-code" required aria-describedby="zip-error" />
+                  <p class="form-error" id="zip-error" role="alert" hidden></p>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="country">Country <span class="required-mark" aria-hidden="true">*</span></label>
+                <select id="country" name="country" autocomplete="country" required aria-describedby="country-error">
+                  <option value="">Select a country</option>
+                  <option value="US">United States</option>
+                  <option value="CA">Canada</option>
+                  <option value="GB">United Kingdom</option>
+                  <option value="AU">Australia</option>
+                  <option value="IN">India</option>
+                </select>
+                <p class="form-error" id="country-error" role="alert" hidden></p>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--lg btn--full" id="shipping-next-btn">Continue to payment</button>
+            </form>
+          </section>
+
+          <!-- STEP 2: Payment -->
+          <section id="step-2" class="checkout-panel" aria-labelledby="payment-heading" hidden>
+            <h2 id="payment-heading" class="checkout-panel__heading">Payment details</h2>
+            <p class="checkout-panel__note">This is a demo — no real payment is processed.</p>
+
+            <form id="payment-form" novalidate>
+              <div class="form-group">
+                <label class="form-label" for="name-on-card">Name on card <span class="required-mark" aria-hidden="true">*</span></label>
+                <input type="text" id="name-on-card" name="name_on_card" autocomplete="cc-name" required aria-describedby="name-on-card-error" />
+                <p class="form-error" id="name-on-card-error" role="alert" hidden></p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="card-number">Card number <span class="required-mark" aria-hidden="true">*</span></label>
+                <input type="text" id="card-number" name="card_number" autocomplete="cc-number" inputmode="numeric" maxlength="19" placeholder="1234 5678 9012 3456" required aria-describedby="card-number-error" />
+                <p class="form-error" id="card-number-error" role="alert" hidden></p>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="expiry">Expiry date <span class="required-mark" aria-hidden="true">*</span></label>
+                  <input type="text" id="expiry" name="expiry" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5" required aria-describedby="expiry-error" />
+                  <p class="form-error" id="expiry-error" role="alert" hidden></p>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="cvv">Security code <span class="required-mark" aria-hidden="true">*</span></label>
+                  <input type="text" id="cvv" name="cvv" autocomplete="cc-csc" placeholder="CVV" maxlength="4" inputmode="numeric" required aria-describedby="cvv-error" />
+                  <p class="form-error" id="cvv-error" role="alert" hidden></p>
+                </div>
+              </div>
+
+              <div class="checkout-panel__actions">
+                <button type="button" class="btn btn--ghost" id="payment-back-btn">← Back</button>
+                <button type="submit" class="btn btn--primary btn--lg" id="payment-next-btn">Review order</button>
+              </div>
+            </form>
+          </section>
+
+          <!-- STEP 3: Confirmation -->
+          <section id="step-3" class="checkout-panel checkout-confirmation" aria-labelledby="confirm-heading" hidden>
+            <div class="checkout-confirmation__icon" aria-hidden="true">✓</div>
+            <h2 id="confirm-heading" class="checkout-panel__heading">Order placed!</h2>
+            <p class="checkout-confirmation__text">Thank you for your order. A confirmation would be sent to <strong id="confirm-email"></strong> in a real store.</p>
+            <p class="checkout-confirmation__order-num">Order <strong id="confirm-order-num"></strong></p>
+            <a href="shop.html" class="btn btn--primary btn--lg">Continue shopping</a>
+          </section>
+
+        </div>
+
+        <!-- Order summary sidebar (mirrors cart.html summary, updated by checkout.js) -->
+        <aside class="order-summary checkout-summary" aria-labelledby="checkout-summary-heading">
+          <h2 id="checkout-summary-heading" class="order-summary__heading">Order Summary</h2>
+          <div id="checkout-summary-items" class="checkout-summary__items"></div>
+          <dl class="order-summary__rows">
+            <div class="order-summary__row">
+              <dt>Subtotal</dt>
+              <dd id="co-subtotal">$0.00</dd>
+            </div>
+            <div class="order-summary__row">
+              <dt>Shipping</dt>
+              <dd id="co-shipping">$0.00</dd>
+            </div>
+            <div class="order-summary__row">
+              <dt>Estimated tax</dt>
+              <dd id="co-tax">$0.00</dd>
+            </div>
+            <div class="order-summary__row order-summary__row--total">
+              <dt>Total</dt>
+              <dd id="co-total">$0.00</dd>
+            </div>
+          </dl>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <div id="toast-container" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+  <script src="js/modules/storage.js"></script>
+  <script src="js/modules/toast.js"></script>
+  <script src="js/modules/cart.js"></script>
+  <script src="js/modules/wishlist.js"></script>
+  <script src="js/modules/product-render.js"></script>
+  <script src="js/modules/nav.js"></script>
+  <script src="js/modules/validation.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/checkout.js"></script>
+</body>
+</html>

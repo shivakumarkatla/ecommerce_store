@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create account — Nestwell</title>
+  <meta name="description" content="Create a Nestwell account to save your wishlist, track orders and check out faster." />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/account.css" />
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header site-header--checkout" id="site-header">
+    <div class="container site-header__inner">
+      <a href="index.html" class="site-header__logo" aria-label="Nestwell — home">Nestwell</a>
+      <a href="shop.html" class="btn btn--ghost btn--sm">Continue shopping</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="container">
+      <div class="auth-panel">
+        <h1 class="auth-panel__heading">Create your account</h1>
+        <p class="auth-panel__sub">Save your wishlist, track orders and check out faster next time.</p>
+
+        <p class="form-error auth-panel__error" id="register-error" role="alert" hidden></p>
+
+        <form class="auth-form" id="register-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="reg-first-name">First name <span class="required-mark" aria-hidden="true">*</span></label>
+              <input type="text" id="reg-first-name" name="first_name" autocomplete="given-name" required aria-describedby="reg-first-name-error" />
+              <p class="form-error" id="reg-first-name-error" role="alert" hidden></p>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reg-last-name">Last name <span class="required-mark" aria-hidden="true">*</span></label>
+              <input type="text" id="reg-last-name" name="last_name" autocomplete="family-name" required aria-describedby="reg-last-name-error" />
+              <p class="form-error" id="reg-last-name-error" role="alert" hidden></p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-email">Email address <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="email" id="reg-email" name="email" autocomplete="email" required aria-describedby="reg-email-error" />
+            <p class="form-error" id="reg-email-error" role="alert" hidden></p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-password">Password <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="password" id="reg-password" name="password" autocomplete="new-password" required aria-describedby="reg-password-error reg-password-hint" />
+            <p class="form-hint" id="reg-password-hint">Must be at least 8 characters.</p>
+            <p class="form-error" id="reg-password-error" role="alert" hidden></p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-confirm-password">Confirm password <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="password" id="reg-confirm-password" name="confirm_password" autocomplete="new-password" required aria-describedby="reg-confirm-password-error" />
+            <p class="form-error" id="reg-confirm-password-error" role="alert" hidden></p>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--full btn--lg" id="register-submit-btn">Create account</button>
+        </form>
+
+        <p class="auth-panel__switch">
+          Already have an account? <a href="login.html">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast-container" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+  <script src="js/modules/storage.js"></script>
+  <script src="js/modules/toast.js"></script>
+  <script src="js/modules/cart.js"></script>
+  <script src="js/modules/wishlist.js"></script>
+  <script src="js/modules/product-render.js"></script>
+  <script src="js/modules/nav.js"></script>
+  <script src="js/modules/validation.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/account.js"></script>
+</body>
+</html>

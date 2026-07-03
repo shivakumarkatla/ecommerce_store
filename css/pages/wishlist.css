@@ -1,0 +1,38 @@
+/* ==========================================================================
+   PAGES/WISHLIST.CSS
+   Wishlist page layout. The product grid reuses .product-grid from
+   layout.css; only the page-header and grid wrapper are page-specific.
+   ========================================================================== */
+
+.wishlist-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-4) var(--space-6);
+}
+
+.wishlist-header__heading {
+  /* inherits from base h1 */
+}
+
+.wishlist-header__count {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  padding-bottom: var(--space-16);
+}
+
+@media (min-width: 768px) {
+  .wishlist-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .wishlist-grid { grid-template-columns: repeat(4, 1fr); }
+}

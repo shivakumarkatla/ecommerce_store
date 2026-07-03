@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wishlist — Nestwell</title>
+  <meta name="description" content="Your saved products at Nestwell." />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/wishlist.css" />
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" id="site-header">
+    <div class="container site-header__inner">
+      <button type="button" class="icon-btn site-header__menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <a href="index.html" class="site-header__logo" aria-label="Nestwell — home">Nestwell</a>
+      <nav class="site-nav" aria-label="Primary">
+        <ul class="site-nav__list">
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="shop.html?category=electronics">Electronics</a></li>
+          <li><a href="shop.html?category=home">Home &amp; Living</a></li>
+          <li><a href="shop.html?category=fashion">Fashion</a></li>
+          <li><a href="shop.html?on_sale=true">Sale</a></li>
+        </ul>
+      </nav>
+      <form class="site-search" role="search" action="search.html" method="get">
+        <label for="site-search-input" class="visually-hidden">Search products</label>
+        <input type="search" name="q" id="site-search-input" class="site-search__input" placeholder="Search products…" autocomplete="off" />
+        <button type="submit" class="icon-btn site-search__submit" aria-label="Search">
+          <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </form>
+      <div class="site-header__actions">
+        <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+          <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s-7-4.35-9.5-8.5C.6 8.9 2.2 5 6 5c2 0 3.3 1 4 2 0.7-1 2-2 4-2 3.8 0 5.4 3.9 3.5 7.5C19 16.65 12 21 12 21z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        </a>
+        <a href="cart.html" class="icon-btn site-header__cart" aria-label="Cart, 0 items">
+          <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M3 3h2l2.6 12.4a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 8H6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="21" r="1.5" fill="currentColor"/><circle cx="18" cy="21" r="1.5" fill="currentColor"/></svg>
+          <span class="cart-badge" id="cart-badge" aria-hidden="true">0</span>
+        </a>
+        <a href="account.html" class="icon-btn" aria-label="Account">
+          <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" hidden>
+    <ul class="mobile-nav__list">
+      <li><a href="search.html">Search</a></li>
+      <li><a href="shop.html">Shop All</a></li>
+      <li><a href="shop.html?category=electronics">Electronics</a></li>
+      <li><a href="shop.html?category=home">Home &amp; Living</a></li>
+      <li><a href="shop.html?category=fashion">Fashion</a></li>
+      <li><a href="shop.html?on_sale=true">Sale</a></li>
+      <li><a href="wishlist.html">Wishlist</a></li>
+      <li><a href="account.html">Account</a></li>
+    </ul>
+  </nav>
+  <div class="drawer-overlay" id="drawer-overlay" hidden></div>
+
+  <main id="main-content">
+    <div class="container">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <ol class="breadcrumb__list">
+          <li><a href="index.html">Home</a></li>
+          <li aria-current="page">Wishlist</li>
+        </ol>
+      </nav>
+
+      <div class="wishlist-header">
+        <h1 class="wishlist-header__heading">Your Wishlist</h1>
+        <p class="wishlist-header__count" id="wishlist-count" aria-live="polite"></p>
+      </div>
+
+      <!-- Empty state -->
+      <div class="empty-state" id="wishlist-empty" hidden>
+        <svg class="empty-state__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s-7-4.35-9.5-8.5C.6 8.9 2.2 5 6 5c2 0 3.3 1 4 2 0.7-1 2-2 4-2 3.8 0 5.4 3.9 3.5 7.5C19 16.65 12 21 12 21z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <h2>Your wishlist is empty</h2>
+        <p>Save items you love and come back to them anytime.</p>
+        <a href="shop.html" class="btn btn--primary">Start shopping</a>
+      </div>
+
+      <!-- Wishlist grid -->
+      <div id="wishlist-grid" class="wishlist-grid" aria-live="polite" hidden></div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__grid">
+      <div class="site-footer__col">
+        <p class="site-footer__logo">Nestwell</p>
+        <p class="site-footer__text">Quality goods for everyday life, shipped from our warehouse to your door.</p>
+      </div>
+      <nav class="site-footer__col" aria-labelledby="footer-shop-heading">
+        <h3 id="footer-shop-heading" class="site-footer__heading">Shop</h3>
+        <ul>
+          <li><a href="shop.html?category=electronics">Electronics</a></li>
+          <li><a href="shop.html?category=home">Home &amp; Living</a></li>
+          <li><a href="shop.html?category=fashion">Fashion</a></li>
+          <li><a href="shop.html?on_sale=true">Sale</a></li>
+        </ul>
+      </nav>
+      <nav class="site-footer__col" aria-labelledby="footer-help-heading">
+        <h3 id="footer-help-heading" class="site-footer__heading">Help</h3>
+        <ul>
+          <li><a href="account.html">My account</a></li>
+          <li><a href="cart.html">Cart</a></li>
+          <li><a href="wishlist.html">Wishlist</a></li>
+        </ul>
+      </nav>
+      <div class="site-footer__col">
+        <h3 class="site-footer__heading">Follow us</h3>
+        <div class="site-footer__socials">
+          <a href="#" class="icon-btn" aria-label="Nestwell on Instagram">
+            <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="#" class="icon-btn" aria-label="Nestwell on Twitter">
+            <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1a4.2 4.2 0 0 0-7.1 3.8A11.9 11.9 0 0 1 3.2 4.6a4.2 4.2 0 0 0 1.3 5.6c-.6 0-1.3-.2-1.8-.5v.1c0 2 1.4 3.7 3.3 4.1-.6.2-1.2.2-1.8.1.5 1.6 2 2.8 3.8 2.8A8.4 8.4 0 0 1 2 18.4a11.9 11.9 0 0 0 6.4 1.9c7.7 0 11.9-6.4 11.9-11.9v-.5c.8-.6 1.5-1.3 2-2.1z" fill="currentColor"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="container site-footer__bottom">
+      <p>&copy; <span id="current-year">2026</span> Nestwell. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div id="toast-container" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+  <script src="js/modules/storage.js"></script>
+  <script src="js/modules/toast.js"></script>
+  <script src="js/modules/cart.js"></script>
+  <script src="js/modules/wishlist.js"></script>
+  <script src="js/modules/product-render.js"></script>
+  <script src="js/modules/nav.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/wishlist.js"></script>
+</body>
+</html>

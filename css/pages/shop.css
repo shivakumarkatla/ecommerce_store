@@ -1,0 +1,185 @@
+/* ==========================================================================
+   PAGES/SHOP.CSS
+   Layout for the Product Listing Page: breadcrumb, page header, the
+   sidebar+content grid, and the mobile filter drawer (which reuses the
+   same off-canvas transform pattern as .mobile-nav in layout.css, but
+   is a separate element so opening filters never conflicts with the
+   main nav drawer).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   SHOP HEADER
+   -------------------------------------------------------------------------- */
+.shop-header {
+  padding-block: var(--space-4) var(--space-6);
+}
+
+.shop-header__heading {
+  margin-bottom: var(--space-1);
+}
+
+.shop-header__count {
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+}
+
+/* --------------------------------------------------------------------------
+   SHOP LAYOUT — mobile: filters live in an off-canvas drawer, content
+   takes the full width. Desktop (see media query below): sidebar
+   becomes a static column beside the content.
+   -------------------------------------------------------------------------- */
+.shop-layout {
+  display: block;
+  padding-bottom: var(--space-16);
+}
+
+/* --------------------------------------------------------------------------
+   FILTER SIDEBAR — off-canvas drawer on mobile/tablet (<1024px),
+   identical transform-based pattern to .mobile-nav so the interaction
+   feels consistent across the site.
+   -------------------------------------------------------------------------- */
+.filter-sidebar {
+  position: fixed;
+  inset: 0 25% 0 auto;
+  width: 85%;
+  max-width: 360px;
+  background-color: var(--color-bg-surface);
+  z-index: var(--z-drawer);
+  padding: var(--space-5);
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform var(--transition-base);
+  box-shadow: var(--shadow-lg);
+}
+
+.filter-sidebar.is-open {
+  transform: translateX(0);
+}
+
+.filter-sidebar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.filter-sidebar__heading {
+  font-size: var(--text-lg);
+}
+
+.filter-group {
+  border: none;
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.filter-group__legend {
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-3);
+  padding: 0;
+}
+
+.filter-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-block: var(--space-2);
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.filter-checkbox input {
+  width: 18px;
+  height: 18px;
+  min-height: 0; /* override the 44px min-height set globally for text inputs */
+  accent-color: var(--color-brand-600);
+}
+
+.filter-price-row {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.filter-price-row .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.filter-sidebar__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: var(--space-5);
+}
+
+/* --------------------------------------------------------------------------
+   SHOP CONTENT (toolbar + grid + load more)
+   -------------------------------------------------------------------------- */
+.shop-content {
+  min-width: 0; /* prevents grid blowout if a long product name would
+                   otherwise stretch the column past its track */
+}
+
+.shop-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.shop-toolbar__sort {
+  margin-bottom: 0;
+  min-width: 160px;
+}
+
+.shop-toolbar__sort select {
+  width: 100%;
+}
+
+.load-more-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-8);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+/* --- Desktop (≥1024px): sidebar becomes a static column, filter-toggle
+       and filter-close buttons (mobile-only affordances) are hidden --- */
+@media (min-width: 1024px) {
+  .shop-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .filter-sidebar {
+    position: static;
+    inset: auto;
+    width: auto;
+    max-width: none;
+    transform: none;
+    transition: none;
+    box-shadow: none;
+    padding: 0;
+    z-index: auto;
+  }
+
+  .filter-sidebar__header {
+    display: none; /* "Filters" heading + close button only needed in the drawer context */
+  }
+
+  #filter-toggle {
+    display: none;
+  }
+
+  .shop-toolbar {
+    justify-content: flex-end;
+  }
+}

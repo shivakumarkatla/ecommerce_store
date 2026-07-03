@@ -1,0 +1,53 @@
+/* ==========================================================================
+   PAGES/SEARCH.CSS
+   Search page layout: large hero search input, results header row.
+   Product grid reuses .product-grid from layout.css.
+   ========================================================================== */
+
+.search-hero {
+  padding-block: var(--space-8) var(--space-6);
+}
+
+.search-hero__form {
+  display: flex;
+  gap: var(--space-2);
+  max-width: 640px;
+}
+
+.search-hero__input {
+  flex: 1;
+  font-size: var(--text-lg);
+  padding-inline: var(--space-5);
+}
+
+.search-hero__btn {
+  flex-shrink: 0;
+}
+
+.search-prompt {
+  padding-block: var(--space-10);
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.search-results-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.search-results-header__heading {
+  font-size: var(--text-2xl);
+}
+
+.search-results-header__count {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Results grid gets extra bottom padding before footer */
+#search-results-grid {
+  padding-bottom: var(--space-16);
+}
